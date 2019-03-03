@@ -50,7 +50,12 @@ AnagramDict::AnagramDict(const vector<string>& words)
 void AnagramDict::add_word_to_dict(const std::string& word)
 {
     /* Your code goes here! */
-
+    string a;
+    a.assign(word);
+    sort(a.begin(),a.end());
+    if(dict.find(a)==dict.end())
+        dict[a] = vector<string>();
+    dict[a].push_back(word);
 }
 
 /**
@@ -62,9 +67,15 @@ void AnagramDict::add_word_to_dict(const std::string& word)
 vector<string> AnagramDict::get_anagrams(const string& word) const
 {
     /* Your code goes here! */
-
-    // Stub value - remove when you are done
-    return vector<string>();
+    string a;
+    a.assign(word);
+    sort(a.begin(),a.end());
+    if(dict.find(a)==dict.end())
+        return vector<string>();
+    vector<string> ret;
+    for(string x : dict.find(a)->second)
+        ret.push_back(x);
+    return ret;
 }
 
 /**
@@ -76,7 +87,9 @@ vector<string> AnagramDict::get_anagrams(const string& word) const
 vector<vector<string>> AnagramDict::get_all_anagrams() const
 {
     /* Your code goes here! */
-
-    // Stub value - remove when you are done
-    return vector<vector<string>>();
+    vector<vector<string>> ret;
+    for(auto temp : dict)
+        if(temp.second.size()>1)
+            ret.push_back(get_anagrams(temp.first));
+    return ret;
 }
