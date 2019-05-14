@@ -1,5 +1,5 @@
 EXE_ANAGRAM = anagram_finder
-EXE_FIB = fib_generator
+EXE_FIB = lab_dict
 EXE_FAC = fac
 EXE_HOMOPHONE = homophone_puzzle
 EXE_COMMON_WORDS = find_common_words
@@ -23,11 +23,8 @@ WARNINGS = -pedantic -Wall -Werror -Wfatal-errors -Wextra -Wno-unused-parameter 
 CXXFLAGS = -std=c++1y -stdlib=libc++ -g -O0 $(WARNINGS) -MMD -MP -c
 LDFLAGS = -std=c++1y -stdlib=libc++ -lpng -lc++abi -lpthread
 
-all: $(EXE_ANAGRAM) \
-	$(EXE_FIB) \
-	$(EXE_FAC) \
-	$(EXE_HOMOPHONE) $(EXE_HOMOPHONE) \
-	$(EXE_COMMON_WORDS)
+all: $(EXE_FIB) \
+	$(EXE_FAC)
 
 data:
 	svn export https://subversion.ews.illinois.edu/svn/sp17-cs225/_shared/lab_dict_data data
@@ -54,7 +51,7 @@ $(EXE_COMMON_WORDS):
 
 # Executable dependencies
 $(EXE_ANAGRAM):           $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_ANAGRAM_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_ANAGRAM_PROVIDED))
-$(EXE_FIB):               $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_FIB_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_FIB_PROVIDED))
+$(EXE_FIB):               $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_COMMON_WORDS_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_COMMON_WORDS_PROVIDED)) $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_ANAGRAM_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_ANAGRAM_PROVIDED)) $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_HOMOPHONE_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_HOMOPHONE_PROVIDED)) $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_FIB_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_FIB_PROVIDED))
 $(EXE_FAC):               $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_FAC_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_FAC_PROVIDED))
 $(EXE_HOMOPHONE):         $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_HOMOPHONE_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_HOMOPHONE_PROVIDED))
 $(EXE_COMMON_WORDS):      $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_COMMON_WORDS_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_COMMON_WORDS_PROVIDED))
