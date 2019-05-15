@@ -23,7 +23,7 @@ TEST_CASE("fib") {
 }
 
 TEST_CASE("homophones") {
-    vector<StringTriple> result = cartalk_puzzle(PronounceDict("cmudict.0.7a"), "words.txt");
+    vector<StringTriple> result = cartalk_puzzle(PronounceDict("given_txts/cmudict.0.7a"), "given_txts/words.txt");
     int found = 0;
     for (StringTriple &t : result) {
         if (get<0>(t) == "scent") {
@@ -38,13 +38,13 @@ TEST_CASE("homophones") {
 
 TEST_CASE("find_common_words") {
     SECTION("small texts") {
-        CommonWords cw({"small1.txt", "small2.txt"});
+        CommonWords cw({"given_txts/small1.txt", "given_txts/small2.txt"});
         vector<string> words = cw.get_common_words(3);
         REQUIRE(contains(words, "dog"));
         REQUIRE(contains(words, "pig"));
     }
     SECTION("PrideAndPrejudice.txt Beowulf.txt SherlockHolmes.txt") {
-        CommonWords cw({"PrideAndPrejudice.txt", "Beowulf.txt", "SherlockHolmes.txt"});
+        CommonWords cw({"given_txts/PrideAndPrejudice.txt", "given_txts/Beowulf.txt", "given_txts/SherlockHolmes.txt"});
         vector<string> words = cw.get_common_words(500);
         REQUIRE(contains(words, "and"));
         REQUIRE(contains(words, "in"));
@@ -55,7 +55,7 @@ TEST_CASE("find_common_words") {
 }
 
 TEST_CASE("anagrams") {
-    AnagramDict dict("words.txt");
+    AnagramDict dict("given_txts/words.txt");
     vector<string> anagrams = dict.get_anagrams("dog");
     REQUIRE(contains(anagrams, "god"));
 }

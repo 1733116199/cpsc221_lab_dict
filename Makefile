@@ -54,11 +54,8 @@ $(EXE_FAC):               $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_FAC_STUDE
 -include $(OBJS_DIR)/*.d
 
 clean:
-	rm -rf $(EXE_ANAGRAM) \
-		$(EXE) \
+	rm -rf $(EXE) \
 		$(EXE_FAC) \
-		$(EXE_HOMOPHONE) \
-		$(EXE_COMMON_WORDS) \
 		$(OBJS_DIR)
 
 tidy: clean
