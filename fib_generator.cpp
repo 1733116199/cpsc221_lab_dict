@@ -1,4 +1,4 @@
-#include "../../Desktop/lab_dict 3/fib.h"
+#include "fib.h"
 
 #include <iostream>
 #include <cstring>
