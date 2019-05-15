@@ -9,13 +9,9 @@ add_custom_target(${name} COMMAND make -C ${${name}_SOURCE_DIR}
 
 add_executable(cpsc221_lab_dict
         anagram_dict.cpp
-        anagram_finder.cpp
         cartalk_puzzle.cpp
         fac.cpp
         fib.cpp
-        fib_generator.cpp
+        main.cpp
         common_words.cpp
-        find_common_words.cpp
-        find_common_words.cpp
-        homophone_puzzle.cpp
         pronounce_dict.cpp)

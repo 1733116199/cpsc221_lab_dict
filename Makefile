@@ -5,11 +5,10 @@ EXE_HOMOPHONE = homophone_puzzle
 EXE_COMMON_WORDS = find_common_words
 
 OBJS_DIR = .objs
-
 OBJS_ANAGRAM_STUDENT = anagram_dict.o
 OBJS_ANAGRAM_PROVIDED = anagram_finder.o
 OBJS_FIB_STUDENT = fib.o
-OBJS_FIB_PROVIDED = fib_generator.o
+OBJS_FIB_PROVIDED = main.o
 OBJS_FAC_STUDENT =
 OBJS_FAC_PROVIDED = fac.o
 OBJS_HOMOPHONE_STUDENT = pronounce_dict.o cartalk_puzzle.o
@@ -38,23 +37,18 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 # Rules for executables... we can use a pattern for the -asan versions, but, unfortunately, we can't use a pattern for the normal executables
-$(EXE_ANAGRAM):
-	$(LD) $^ $(LDFLAGS) -o $@
 $(EXE_FIB):
 	$(LD) $^ $(LDFLAGS) -o $@
 $(EXE_FAC):
 	$(LD) $^ $(LDFLAGS) -o $@
-$(EXE_HOMOPHONE):
-	$(LD) $^ $(LDFLAGS) -o $@
-$(EXE_COMMON_WORDS):
-	$(LD) $^ $(LDFLAGS) -o $@
 
 # Executable dependencies
-$(EXE_ANAGRAM):           $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_ANAGRAM_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_ANAGRAM_PROVIDED))
-$(EXE_FIB):               $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_COMMON_WORDS_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_COMMON_WORDS_PROVIDED)) $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_ANAGRAM_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_ANAGRAM_PROVIDED)) $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_HOMOPHONE_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_HOMOPHONE_PROVIDED)) $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_FIB_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_FIB_PROVIDED))
+$(EXE_FIB):               $(patsubst %.o, $(OBJS_DIR)/%.o,        $(OBJS_COMMON_WORDS_STUDENT)) \
+							$(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_ANAGRAM_STUDENT)) \
+							$(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_HOMOPHONE_STUDENT))  \
+							$(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_FIB_STUDENT)) \
+							$(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_FIB_PROVIDED))
 $(EXE_FAC):               $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_FAC_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_FAC_PROVIDED))
-$(EXE_HOMOPHONE):         $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_HOMOPHONE_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_HOMOPHONE_PROVIDED))
-$(EXE_COMMON_WORDS):      $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_COMMON_WORDS_STUDENT)) $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_COMMON_WORDS_PROVIDED))
 
 # Include automatically generated dependencies
 -include $(OBJS_DIR)/*.d
