@@ -20,7 +20,7 @@ CXX = clang++
 LD = clang++
 WARNINGS = -pedantic -Wall -Werror -Wfatal-errors -Wextra -Wno-unused-parameter -Wno-unused-variable
 CXXFLAGS = -std=c++1y -stdlib=libc++ -g -O0 $(WARNINGS) -MMD -MP -c
-LDFLAGS = -std=c++1y -stdlib=libc++ -lpng -lc++abi -lpthread
+LDFLAGS = -std=c++1y -stdlib=libc++ -lc++abi -lpthread
 
 all: $(EXE) \
 	$(EXE_FAC)
@@ -55,7 +55,7 @@ $(EXE_FAC):               $(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_FAC_STUDE
 
 clean:
 	rm -rf $(EXE_ANAGRAM) \
-		$(EXE_FIB) \
+		$(EXE) \
 		$(EXE_FAC) \
 		$(EXE_HOMOPHONE) \
 		$(EXE_COMMON_WORDS) \
