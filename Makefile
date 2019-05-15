@@ -1,5 +1,5 @@
 EXE_ANAGRAM = anagram_finder
-EXE_FIB = lab_dict
+EXE = lab_dict
 EXE_FAC = fac
 EXE_HOMOPHONE = homophone_puzzle
 EXE_COMMON_WORDS = find_common_words
@@ -22,7 +22,7 @@ WARNINGS = -pedantic -Wall -Werror -Wfatal-errors -Wextra -Wno-unused-parameter 
 CXXFLAGS = -std=c++1y -stdlib=libc++ -g -O0 $(WARNINGS) -MMD -MP -c
 LDFLAGS = -std=c++1y -stdlib=libc++ -lpng -lc++abi -lpthread
 
-all: $(EXE_FIB) \
+all: $(EXE) \
 	$(EXE_FAC)
 
 data:
@@ -37,13 +37,13 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 # Rules for executables... we can use a pattern for the -asan versions, but, unfortunately, we can't use a pattern for the normal executables
-$(EXE_FIB):
+$(EXE):
 	$(LD) $^ $(LDFLAGS) -o $@
 $(EXE_FAC):
 	$(LD) $^ $(LDFLAGS) -o $@
 
 # Executable dependencies
-$(EXE_FIB):               $(patsubst %.o, $(OBJS_DIR)/%.o,        $(OBJS_COMMON_WORDS_STUDENT)) \
+$(EXE):               $(patsubst %.o, $(OBJS_DIR)/%.o,        $(OBJS_COMMON_WORDS_STUDENT)) \
 							$(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_ANAGRAM_STUDENT)) \
 							$(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_HOMOPHONE_STUDENT))  \
 							$(patsubst %.o, $(OBJS_DIR)/%.o,      $(OBJS_FIB_STUDENT)) \
